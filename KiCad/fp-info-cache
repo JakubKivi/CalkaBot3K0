@@ -1,4 +1,4 @@
-23350016780928656
+23351734204424487
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -62459,6 +62459,13 @@ SMD Solder Jumper, 1x1.5mm Triangular Pads, 0.3mm gap, open, labeled with number
 solder jumper open
 0
 5
+3
+L78M05CDT-TR
+VREG_L78M05CDT-TR
+
+
+0
+3
 3
 L6225D
 SO-20_STM
