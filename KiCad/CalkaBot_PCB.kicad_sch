@@ -4199,6 +4199,46 @@
 		(color 0 0 0 0)
 		(uuid "ff806b55-116a-4177-9d03-8e8deb15f197")
 	)
+	(no_connect
+		(at 123.19 81.28)
+		(uuid "09431cc4-5f11-44d6-ac74-9fda3aa9aa8c")
+	)
+	(no_connect
+		(at 123.19 104.14)
+		(uuid "30bd1fd3-8431-4a5d-88f6-17bc107d27de")
+	)
+	(no_connect
+		(at 115.57 60.96)
+		(uuid "32e3da56-d043-400e-96af-9f6fc42d4764")
+	)
+	(no_connect
+		(at 123.19 73.66)
+		(uuid "542676af-b61a-4a9c-92a6-e26e0b0fa172")
+	)
+	(no_connect
+		(at 113.03 60.96)
+		(uuid "7619b55e-234b-49fa-ab12-0bfe42eb2fc1")
+	)
+	(no_connect
+		(at 123.19 99.06)
+		(uuid "bdff1e57-2c05-40da-a021-1aaacbb1e129")
+	)
+	(no_connect
+		(at 123.19 71.12)
+		(uuid "c49b7ea0-2c57-4389-a69a-bc972b5cb52c")
+	)
+	(no_connect
+		(at 97.79 71.12)
+		(uuid "d19a6ed9-2593-47f8-93ce-8c19d6db3102")
+	)
+	(no_connect
+		(at 97.79 73.66)
+		(uuid "d7b27137-0710-4183-8ce4-09c1b425a926")
+	)
+	(no_connect
+		(at 123.19 101.6)
+		(uuid "fdf3f876-1e0a-4821-a775-28ad845a8863")
+	)
 	(wire
 		(pts
 			(xy 26.67 38.1) (xy 26.67 45.72)
@@ -4341,7 +4381,7 @@
 	)
 	(wire
 		(pts
-			(xy 92.71 147.32) (xy 92.71 152.4)
+			(xy 92.71 148.59) (xy 92.71 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5161,6 +5201,16 @@
 	)
 	(wire
 		(pts
+			(xy 92.71 140.97) (xy 92.71 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ad837893-a800-4c2f-a0a4-911443f46da2")
+	)
+	(wire
+		(pts
 			(xy 35.56 105.41) (xy 44.45 105.41)
 		)
 		(stroke
@@ -5298,6 +5348,16 @@
 			(type default)
 		)
 		(uuid "c30f6aa2-6cf3-4a33-bfad-11977f333c52")
+	)
+	(wire
+		(pts
+			(xy 52.07 34.29) (xy 52.07 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3ec2711-a007-44b2-b759-0bf62da36b0a")
 	)
 	(wire
 		(pts
@@ -9500,7 +9560,7 @@
 	)
 	(symbol
 		(lib_id "power:+7.5V")
-		(at 52.07 35.56 0)
+		(at 52.07 34.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9509,7 +9569,7 @@
 		(fields_autoplaced yes)
 		(uuid "c0525702-4df7-4792-8854-8bf9e507d864")
 		(property "Reference" "#PWR015"
-			(at 52.07 39.37 0)
+			(at 52.07 38.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9518,7 +9578,7 @@
 			)
 		)
 		(property "Value" "+7.5V"
-			(at 52.07 30.48 0)
+			(at 52.07 29.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9526,7 +9586,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 52.07 35.56 0)
+			(at 52.07 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9535,7 +9595,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 52.07 35.56 0)
+			(at 52.07 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9544,7 +9604,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+7.5V\""
-			(at 52.07 35.56 0)
+			(at 52.07 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9769,7 +9829,7 @@
 	)
 	(symbol
 		(lib_id "Diode:1N4148WT")
-		(at 92.71 143.51 90)
+		(at 92.71 144.78 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9777,7 +9837,7 @@
 		(dnp no)
 		(uuid "cd079a1f-d8c2-4ab1-8854-f3aaad130f56")
 		(property "Reference" "D1"
-			(at 93.98 140.97 90)
+			(at 93.98 142.24 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9786,7 +9846,7 @@
 			)
 		)
 		(property "Value" "1N4148WT"
-			(at 93.98 143.51 90)
+			(at 93.98 144.78 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9795,7 +9855,7 @@
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SOD-523"
-			(at 97.155 143.51 0)
+			(at 97.155 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9804,7 +9864,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds30396.pdf"
-			(at 92.71 143.51 0)
+			(at 92.71 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9813,7 +9873,7 @@
 			)
 		)
 		(property "Description" "75V 0.15A Fast switching Diode, SOD-523"
-			(at 92.71 143.51 0)
+			(at 92.71 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9822,7 +9882,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 92.71 143.51 0)
+			(at 92.71 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9831,7 +9891,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 92.71 143.51 0)
+			(at 92.71 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
