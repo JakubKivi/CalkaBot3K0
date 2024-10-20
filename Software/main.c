@@ -6,6 +6,6 @@ int main(void) {
 
     while (1) {
         PORTB ^= (1 << PB5);  // zmiana stanu pinu 13
-        _delay_ms(100);      // czekaj 1 sekundę
+        _delay_ms(200);      // czekaj 1 sekundę
     }
 }
