@@ -1,4 +1,6 @@
+# Ignorowanie plików ELF i HEX
 *.elf
 *.hex
-*.o
-*.d
+
+# Ignorowanie folderu .vscode
+.vscode/

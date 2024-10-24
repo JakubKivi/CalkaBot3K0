@@ -3444,9 +3444,8 @@
 				)
 			)
 		)
-		(symbol "Transistor_BJT:BC107"
-			(pin_names
-				(offset 0) hide)
+		(symbol "Transistor_FET:BS108"
+			(pin_names hide)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -3459,7 +3458,7 @@
 					(justify left)
 				)
 			)
-			(property "Value" "BC107"
+			(property "Value" "BS108"
 				(at 5.08 0 0)
 				(effects
 					(font
@@ -3468,7 +3467,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Package_TO_SOT_THT:TO-18-3"
+			(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
 				(at 5.08 -1.905 0)
 				(effects
 					(font
@@ -3479,8 +3478,8 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "http://www.b-kainka.de/Daten/Transistor/BC108.pdf"
-				(at 0 0 0)
+			(property "Datasheet" "http://www.redrok.com/MOSFET_BS108_200V_250mA_8O_Vth1.5_TO-92.PDF"
+				(at 5.08 -3.81 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -3489,7 +3488,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "0.1A Ic, 50V Vce, Low Noise General Purpose NPN Transistor, TO-18"
+			(property "Description" "0.25A Id, 200V Vds, N-Channel MOSFET, TO-92"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3498,7 +3497,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "NPN low noise transistor"
+			(property "ki_keywords" "N-Channel MOSFET"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3507,7 +3506,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "TO?18*"
+			(property "ki_fp_filters" "TO?92*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3516,10 +3515,10 @@
 					(hide yes)
 				)
 			)
-			(symbol "BC107_0_1"
+			(symbol "BS108_0_1"
 				(polyline
 					(pts
-						(xy 0.635 0.635) (xy 2.54 2.54)
+						(xy 0.254 0) (xy -2.54 0)
 					)
 					(stroke
 						(width 0)
@@ -3531,7 +3530,55 @@
 				)
 				(polyline
 					(pts
-						(xy 0.635 -0.635) (xy 2.54 -2.54) (xy 2.54 -2.54)
+						(xy 0.254 1.905) (xy 0.254 -1.905)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 -1.27) (xy 0.762 -2.286)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 0.508) (xy 0.762 -0.508)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 2.286) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54) (xy 2.54 1.778)
 					)
 					(stroke
 						(width 0)
@@ -3543,10 +3590,10 @@
 				)
 				(polyline
 					(pts
-						(xy 0.635 1.905) (xy 0.635 -1.905) (xy 0.635 -1.905)
+						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
 					)
 					(stroke
-						(width 0.508)
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -3555,7 +3602,19 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -1.778) (xy 1.778 -1.27) (xy 2.286 -2.286) (xy 1.27 -1.778) (xy 1.27 -1.778)
+						(xy 0.762 -1.778) (xy 3.302 -1.778) (xy 3.302 1.778) (xy 0.762 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 0) (xy 2.032 0.381) (xy 2.032 -0.381) (xy 1.016 0)
 					)
 					(stroke
 						(width 0)
@@ -3565,9 +3624,33 @@
 						(type outline)
 					)
 				)
+				(polyline
+					(pts
+						(xy 2.794 0.508) (xy 2.921 0.381) (xy 3.683 0.381) (xy 3.81 0.254)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.302 0.381) (xy 2.921 -0.254) (xy 3.683 -0.254) (xy 3.302 0.381)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(circle
-					(center 1.27 0)
-					(radius 2.8194)
+					(center 1.651 0)
+					(radius 2.794)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -3576,12 +3659,34 @@
 						(type none)
 					)
 				)
+				(circle
+					(center 2.54 -1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 2.54 1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 			)
-			(symbol "BC107_1_1"
+			(symbol "BS108_1_1"
 				(pin passive line
-					(at 2.54 -5.08 90)
+					(at 2.54 5.08 270)
 					(length 2.54)
-					(name "E"
+					(name "D"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3598,8 +3703,8 @@
 				)
 				(pin input line
 					(at -5.08 0 0)
-					(length 5.715)
-					(name "B"
+					(length 2.54)
+					(name "G"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3615,9 +3720,9 @@
 					)
 				)
 				(pin passive line
-					(at 2.54 5.08 270)
+					(at 2.54 -5.08 90)
 					(length 2.54)
-					(name "C"
+					(name "S"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4050,7 +4155,7 @@
 		(uuid "6a57fb00-79d1-42e2-8d0f-090765e5f38d")
 	)
 	(junction
-		(at 44.45 96.52)
+		(at 52.07 113.03)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6b8c3a95-f3ef-4461-8d4e-26df669d76a9")
@@ -4086,7 +4191,7 @@
 		(uuid "9da45e99-e3d6-47bb-819c-b6170e49218e")
 	)
 	(junction
-		(at 35.56 105.41)
+		(at 43.18 121.92)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a216879f-c007-4d77-96f0-0a46ab06f4e4")
@@ -4164,7 +4269,7 @@
 		(uuid "db1a9113-5fbd-461c-9c6f-a54638a031f4")
 	)
 	(junction
-		(at 35.56 135.89)
+		(at 43.18 152.4)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ddfd7c16-b09b-4fdf-b2f9-307e6bd2008b")
@@ -4531,6 +4636,16 @@
 	)
 	(wire
 		(pts
+			(xy 34.29 139.7) (xy 35.56 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3d16422c-fd07-41c0-b763-dea6e938866b")
+	)
+	(wire
+		(pts
 			(xy 165.1 85.09) (xy 165.1 74.93)
 		)
 		(stroke
@@ -4561,7 +4676,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 105.41) (xy 35.56 118.11)
+			(xy 43.18 121.92) (xy 43.18 134.62)
 		)
 		(stroke
 			(width 0)
@@ -4651,7 +4766,7 @@
 	)
 	(wire
 		(pts
-			(xy 44.45 96.52) (xy 60.96 96.52)
+			(xy 52.07 113.03) (xy 68.58 113.03)
 		)
 		(stroke
 			(width 0)
@@ -4841,7 +4956,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 99.06) (xy 35.56 105.41)
+			(xy 43.18 115.57) (xy 43.18 121.92)
 		)
 		(stroke
 			(width 0)
@@ -4961,7 +5076,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 135.89) (xy 35.56 140.97)
+			(xy 43.18 152.4) (xy 43.18 157.48)
 		)
 		(stroke
 			(width 0)
@@ -4981,7 +5096,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 128.27) (xy 35.56 135.89)
+			(xy 43.18 144.78) (xy 43.18 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5171,17 +5286,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 123.19) (xy 43.18 123.19)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a70caaf0-362a-4e63-ad6a-12418b3141f2")
-	)
-	(wire
-		(pts
-			(xy 44.45 97.79) (xy 44.45 96.52)
+			(xy 52.07 114.3) (xy 52.07 113.03)
 		)
 		(stroke
 			(width 0)
@@ -5211,7 +5316,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 105.41) (xy 44.45 105.41)
+			(xy 43.18 121.92) (xy 52.07 121.92)
 		)
 		(stroke
 			(width 0)
@@ -5581,7 +5686,7 @@
 	)
 	(wire
 		(pts
-			(xy 36.83 135.89) (xy 35.56 135.89)
+			(xy 44.45 152.4) (xy 43.18 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5611,7 +5716,7 @@
 	)
 	(wire
 		(pts
-			(xy 35.56 96.52) (xy 44.45 96.52)
+			(xy 43.18 113.03) (xy 52.07 113.03)
 		)
 		(stroke
 			(width 0)
@@ -5651,7 +5756,7 @@
 	)
 	(wire
 		(pts
-			(xy 45.72 135.89) (xy 44.45 135.89)
+			(xy 53.34 152.4) (xy 52.07 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5879,29 +5984,29 @@
 	)
 	(global_label "M_FRONT"
 		(shape input)
-		(at 45.72 123.19 0)
+		(at 34.29 139.7 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "7a9a64f2-3cbf-44cd-ba4c-9e52e522c544")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 57.1114 123.19 0)
+			(at 22.8986 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 				(hide yes)
 			)
 		)
 	)
 	(global_label "MotorPower"
 		(shape input)
-		(at 35.56 140.97 270)
+		(at 43.18 157.48 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5911,7 +6016,7 @@
 		)
 		(uuid "8136fb59-7093-441c-b931-7bc34aaaaa43")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.56 154.8408 90)
+			(at 43.18 171.3508 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6388,7 +6493,7 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 40.64 135.89 90)
+		(at 48.26 152.4 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6397,7 +6502,7 @@
 		(fields_autoplaced yes)
 		(uuid "0af5961f-37de-4a45-bb36-17829f88120b")
 		(property "Reference" "C9"
-			(at 40.64 128.27 90)
+			(at 48.26 144.78 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6405,7 +6510,7 @@
 			)
 		)
 		(property "Value" "0u1"
-			(at 40.64 130.81 90)
+			(at 48.26 147.32 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6413,7 +6518,7 @@
 			)
 		)
 		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder"
-			(at 44.45 134.9248 0)
+			(at 52.07 151.4348 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6422,7 +6527,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 40.64 135.89 0)
+			(at 48.26 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6431,7 +6536,7 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor"
-			(at 40.64 135.89 0)
+			(at 48.26 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7163,7 +7268,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_SO:SO-20-1EP_7.52x12.825mm_P1.27mm_EP6.045x12.09mm_Mask3.56x4.47mm_ThermalVias"
+		(property "Footprint" "CalkaBot3k0:PowerSO-20"
 			(at 128.016 124.714 0)
 			(effects
 				(font
@@ -7616,6 +7721,82 @@
 			(project "CalkaBot_PCB"
 				(path "/9ad0a191-bdb5-4f92-a6bf-a208f5e62f7b"
 					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:BS108")
+		(at 40.64 139.7 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "552e6153-bc11-41da-89ef-285e05b09ee2")
+		(property "Reference" "Q3"
+			(at 46.99 138.4299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BS108"
+			(at 46.99 140.9699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_THT:TO-92_Inline"
+			(at 45.72 141.605 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "http://www.redrok.com/MOSFET_BS108_200V_250mA_8O_Vth1.5_TO-92.PDF"
+			(at 45.72 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Description" "0.25A Id, 200V Vds, N-Channel MOSFET, TO-92"
+			(at 40.64 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "21189c27-ac5c-4009-9478-26afacbaebef")
+		)
+		(pin "3"
+			(uuid "a1d8c293-4b6c-4e9f-9c39-d95eb8ddc886")
+		)
+		(pin "1"
+			(uuid "9928c812-ca11-48fe-9d32-4051b4bb17b6")
+		)
+		(instances
+			(project "CalkaBot_PCB"
+				(path "/9ad0a191-bdb5-4f92-a6bf-a208f5e62f7b"
+					(reference "Q3")
 					(unit 1)
 				)
 			)
@@ -8592,7 +8773,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
-		(at 30.48 96.52 0)
+		(at 38.1 113.03 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8601,7 +8782,7 @@
 		(fields_autoplaced yes)
 		(uuid "8c6161ec-5c71-4d04-858f-9cf9fe812862")
 		(property "Reference" "J5"
-			(at 31.115 91.44 0)
+			(at 38.735 107.95 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8609,7 +8790,7 @@
 			)
 		)
 		(property "Value" "MOTOR3"
-			(at 31.115 93.98 0)
+			(at 38.735 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8617,7 +8798,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical"
-			(at 30.48 96.52 0)
+			(at 38.1 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8626,7 +8807,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 30.48 96.52 0)
+			(at 38.1 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8635,7 +8816,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 30.48 96.52 0)
+			(at 38.1 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9273,7 +9454,7 @@
 	)
 	(symbol
 		(lib_id "Device:D")
-		(at 44.45 101.6 90)
+		(at 52.07 118.11 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9282,7 +9463,7 @@
 		(fields_autoplaced yes)
 		(uuid "b1e4058d-34ef-4a2d-8633-79fb73431c42")
 		(property "Reference" "D3"
-			(at 46.99 100.3299 90)
+			(at 54.61 116.8399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9291,7 +9472,7 @@
 			)
 		)
 		(property "Value" "SS14"
-			(at 46.99 102.8699 90)
+			(at 54.61 119.3799 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9300,7 +9481,7 @@
 			)
 		)
 		(property "Footprint" "Diode_SMD:D_SMA_Handsoldering"
-			(at 44.45 101.6 0)
+			(at 52.07 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9309,7 +9490,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 44.45 101.6 0)
+			(at 52.07 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9318,7 +9499,7 @@
 			)
 		)
 		(property "Description" "Diode"
-			(at 44.45 101.6 0)
+			(at 52.07 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9327,7 +9508,7 @@
 			)
 		)
 		(property "Sim.Device" "D"
-			(at 44.45 101.6 0)
+			(at 52.07 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9336,7 +9517,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 44.45 101.6 0)
+			(at 52.07 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9427,7 +9608,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 45.72 135.89 0)
+		(at 53.34 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9436,7 +9617,7 @@
 		(fields_autoplaced yes)
 		(uuid "b5f51950-2e7d-4492-b7c0-ec85d964fb4c")
 		(property "Reference" "#PWR022"
-			(at 45.72 142.24 0)
+			(at 53.34 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9445,7 +9626,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 45.72 140.97 0)
+			(at 53.34 157.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9454,7 +9635,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 45.72 135.89 0)
+			(at 53.34 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9463,7 +9644,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 45.72 135.89 0)
+			(at 53.34 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9472,7 +9653,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 45.72 135.89 0)
+			(at 53.34 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10205,7 +10386,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 60.96 96.52 0)
+		(at 68.58 113.03 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10214,7 +10395,7 @@
 		(fields_autoplaced yes)
 		(uuid "d368314d-d262-4181-ad8a-3b8d3487e4f4")
 		(property "Reference" "#PWR021"
-			(at 60.96 102.87 0)
+			(at 68.58 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10223,7 +10404,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 60.96 101.6 0)
+			(at 68.58 118.11 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10232,7 +10413,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 60.96 96.52 0)
+			(at 68.58 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10241,7 +10422,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 60.96 96.52 0)
+			(at 68.58 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10250,7 +10431,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 60.96 96.52 0)
+			(at 68.58 113.03 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10477,82 +10658,6 @@
 			(project "CalkaBot_PCB"
 				(path "/9ad0a191-bdb5-4f92-a6bf-a208f5e62f7b"
 					(reference "C2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Transistor_BJT:BC107")
-		(at 38.1 123.19 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "f9205595-6569-423f-a61c-3943eaff3c2c")
-		(property "Reference" "Q3"
-			(at 33.02 121.9199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "IRLL014NTRPBF"
-			(at 33.02 124.4599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-223"
-			(at 33.02 121.285 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.b-kainka.de/Daten/Transistor/BC108.pdf"
-			(at 38.1 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Description" "0.1A Ic, 50V Vce, Low Noise General Purpose NPN Transistor, TO-18"
-			(at 38.1 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "419060fb-8e30-4ebc-992b-bb8f0bc49b75")
-		)
-		(pin "2"
-			(uuid "9a9ed97b-c989-4289-8382-169f7310a09a")
-		)
-		(pin "3"
-			(uuid "345bd2cb-0640-45df-9201-f08e644efa1e")
-		)
-		(instances
-			(project "CalkaBot_PCB"
-				(path "/9ad0a191-bdb5-4f92-a6bf-a208f5e62f7b"
-					(reference "Q3")
 					(unit 1)
 				)
 			)

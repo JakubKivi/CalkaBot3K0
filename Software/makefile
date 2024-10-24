@@ -6,7 +6,7 @@ AVRDUDE = avrdude               # Narzędzie do programowania
 PORT = COM3                     # Port, do którego podłączony jest mikrokontroler
 BAUD = 115200                   # Prędkość transmisji
 CFLAGS = -mmcu=$(MCU) -Os -DF_CPU=16000000L  # Flagi kompilacji, zdefiniowanie F_CPU na 16 kHz
-SRC_FILES = main.c 		       # Pliki źródłowe
+SRC_FILES = src/main.cpp src/FrontMotor.cpp		       # Pliki źródłowe
 ELF_FILE = main.elf            # Plik ELF
 HEX_FILE = main.hex            # Plik HEX
 
