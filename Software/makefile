@@ -6,12 +6,12 @@ AVRDUDE = avrdude               # Narzędzie do programowania
 PORT = COM3                     # Port, do którego podłączony jest mikrokontroler
 BAUD = 115200                   # Prędkość transmisji
 CFLAGS = -mmcu=$(MCU) -Os -DF_CPU=16000000L  # Flagi kompilacji, zdefiniowanie F_CPU na 16 kHz
-SRC_FILES = src/main.cpp src/FrontMotor.cpp		       # Pliki źródłowe
+SRC_FILES = src/main.cpp src/FrontMotor.cpp	src/UART.cpp src/InputManager.cpp      # Pliki źródłowe
 ELF_FILE = main.elf            # Plik ELF
 HEX_FILE = main.hex            # Plik HEX
 
 # Cel główny
-all: $(HEX_FILE)
+all: $(HEX_FILE) clean
 
 # Kompilacja do pliku ELF
 $(ELF_FILE): $(SRC_FILES)
@@ -24,6 +24,7 @@ $(HEX_FILE): $(ELF_FILE)
 # Flashowanie mikrokontrolera
 flash: $(HEX_FILE)
 	$(AVRDUDE) -c arduino -p $(MCU) -P $(PORT) -b $(BAUD) -U flash:w:$<:i
+
 
 # Cel do czyszczenia
 clean:
