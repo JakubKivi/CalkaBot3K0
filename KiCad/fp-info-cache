@@ -1,4 +1,4 @@
-23353463882693255
+23356951068383901
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -2674,12 +2674,26 @@ CalkBot3k0_Motor_Right
 2
 2
 CalkaBot3k0
-PowerSO-20
+IRLL014NTRPBF
+module CMS SOT223 4 pins
+CMS SOT
+0
+4
+3
+CalkaBot3k0
+KTIR0711S
+
+KTIR0711S 
+0
+4
+4
+CalkaBot3k0
+L6225PD
 
 
 0
-20
-1
+38
+21
 Capacitor_SMD
 CP_Elec_3x5.3
 SMT capacitor, aluminium electrolytic, 3x5.3, Cornell Dubilier Electronics 
