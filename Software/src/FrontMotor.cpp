@@ -11,12 +11,12 @@ void FrontMotor::setPinAsOutput() {
 }
 
 // Włączenie silnika
-void FrontMotor::turnOn() {
+void FrontMotor::on() {
     *port |= (1 << pin); // Ustawienie pinu na wysoki stan
 }
 
 // Wyłączenie silnika
-void FrontMotor::turnOff() {
+void FrontMotor::off() {
     *port &= ~(1 << pin); // Ustawienie pinu na niski stan
 }
 

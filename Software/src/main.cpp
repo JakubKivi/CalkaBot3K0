@@ -17,44 +17,12 @@ int main(void) {
     UART uart(9600);
     
     InputManager inputManager(PD4, PD5, PD6, PD7, &PORTD, &DDRD, &PIND);
-
-
+    FrontMotor FrontMotor(&PORTD, PD3);
     BuildLed errorLED(&PORTC, PC5);  
-    // timer_init();  // Inicjalizacja timera
-
-
 
     while (1)
     {
-        switch (inputManager.readDecimalValue())
-        {
-        case 0:
-            errorLED.killError(10);
-            break;
-        case 1:
-            errorLED.showError(1);
-            break;
-        case 2:
-            errorLED.showError(2);
-            break;
-        case 3:
-            errorLED.showError(3);
-            break;
-        case 4:
-            errorLED.showError(4);
-            break;
-        case 5:
-            errorLED.showError(5);
-            break;
-        case 6:
-            errorLED.showError(6);
-            break;
-        case 7:
-            errorLED.showError(7);
-            break;
-        default:
-            break;
-        }
+        errorLED.killError(inputManager.readDecimalValue());            
     }
     
 }

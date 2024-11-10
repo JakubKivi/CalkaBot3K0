@@ -16,10 +16,10 @@ public:
     FrontMotor(volatile uint8_t* port, uint8_t pin);
 
     // Włączenie silnika
-    void turnOn();
+    void on();
 
     // Wyłączenie silnika
-    void turnOff();
+    void off();
 
     // Przełączenie stanu silnika
     void toggle();
