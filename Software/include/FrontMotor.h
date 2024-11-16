@@ -6,14 +6,12 @@
 class FrontMotor {
 private:
     volatile uint8_t* port; // Wskaźnik do rejestru PORT
+    volatile uint8_t* ddr;  // Wskaźnik do rejestru i/o
     uint8_t pin;            // Numer pinu (0-7)
-
-    // Zwraca stan rejestru DDR (ustawienie pinu jako wyjściowy)
-    void setPinAsOutput();
 
 public:
     // Konstruktor klasy
-    FrontMotor(volatile uint8_t* port, uint8_t pin);
+    FrontMotor(volatile uint8_t* port, volatile uint8_t* ddr, uint8_t pin);
 
     // Włączenie silnika
     void on();

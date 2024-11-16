@@ -6,18 +6,18 @@
 BuildLed* BuildLed::active_led = 0;
 
 // Konstruktor klasy BuildLed
-BuildLed::BuildLed(volatile uint8_t *port, uint8_t pin) {
-    this->port = port;
-    this->pin = pin;
-    this->error_count = 0;
-    this->init();
-    active_led=this;
+BuildLed::BuildLed(volatile uint8_t *port, volatile uint8_t* ddr, uint8_t pin)
+    : port(port), ddr(ddr), pin(pin), error_count(0) {
+    *(ddr) |= (1 << pin);  // DDRx - ustawienie pinu jako wyjście
+    active_led = this;
 }
 
-// Inicjalizacja - ustawienie pinu jako wyjście i diody w stanie niskim
-void BuildLed::init() {
-    *(ddr) |= (1 << pin);  // DDRx - ustawienie pinu jako wyjście
-    *(port) &= ~(1 << pin);  // Ustawienie diody w stan niski
+void BuildLed::on(){            // Włącz LED  
+    *(port) |= (1 << pin);    
+}
+
+void BuildLed::off(){           // Wyłącz LED    
+    *(port) &= ~(1 << pin); 
 }
 
 // Metoda KillError - nieskończona pętla migania

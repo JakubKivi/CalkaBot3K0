@@ -1,7 +1,7 @@
 #include "../include/InputManager.h"
 
 // Konstruktor klasy
-InputManager::InputManager(uint8_t pin1, uint8_t pin2, uint8_t pin3, uint8_t pin4, volatile uint8_t* portRegister, volatile uint8_t* ddr, volatile uint8_t* pinRegister)
+InputManager::InputManager(volatile uint8_t* portRegister, volatile uint8_t* ddr, volatile uint8_t* pinRegister, uint8_t pin1, uint8_t pin2, uint8_t pin3, uint8_t pin4)
     : portRegister(portRegister), pinRegister(pinRegister) {
     pins[0] = pin1;
     pins[1] = pin2;

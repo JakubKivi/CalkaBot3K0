@@ -7,17 +7,17 @@ class BuildLed {
 private:
     volatile uint8_t *port;  // Port, do którego podłączona jest dioda
     uint8_t pin;              // Numer pinu
-    uint8_t *ddr;              // Numer rejestru I/O
+    volatile uint8_t *ddr;              // Numer rejestru I/O
     uint8_t error_count;      // Liczba błędów do migania
     static BuildLed* active_led;  // Statyczny wskaźnik na aktualny obiekt
     
 
 public:
     // Konstruktor
-    BuildLed(volatile uint8_t *port, uint8_t pin);
+    BuildLed(volatile uint8_t *port, volatile uint8_t* ddr, uint8_t pin);
 
-    // Metoda inicjalizująca
-    void init();
+    void on();
+    void off();
 
     // Metoda do migania w pętli (KillError)
     void killError(uint8_t n);

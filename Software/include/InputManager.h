@@ -5,7 +5,7 @@
 
 class InputManager {
 public:
-    InputManager(uint8_t pin1, uint8_t pin2, uint8_t pin3, uint8_t pin4, volatile uint8_t* portRegister, volatile uint8_t* ddr, volatile uint8_t* pinRegister);
+    InputManager(volatile uint8_t* portRegister, volatile uint8_t* ddr, volatile uint8_t* pinRegister, uint8_t pin1, uint8_t pin2, uint8_t pin3, uint8_t pin4);
     uint8_t readPin(uint8_t pin);
     uint8_t readDecimalValue();
 

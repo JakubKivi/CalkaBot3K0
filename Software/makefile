@@ -3,10 +3,10 @@ MCU = atmega328p               # Typ mikrokontrolera
 CC = avr-gcc                   # Kompilator
 OBJCOPY = avr-objcopy           # Narzędzie do konwersji
 AVRDUDE = avrdude               # Narzędzie do programowania
-PORT = COM3                     # Port, do którego podłączony jest mikrokontroler
+PORT = COM6                     # Port, do którego podłączony jest mikrokontroler
 BAUD = 115200                   # Prędkość transmisji
 CFLAGS = -mmcu=$(MCU) -Os -DF_CPU=16000000L  # Flagi kompilacji, zdefiniowanie F_CPU na 16 kHz
-SRC_FILES = src/main.cpp src/FrontMotor.cpp	src/UART.cpp src/InputManager.cpp src/BuildLed.cpp     # Pliki źródłowe
+SRC_FILES = $(wildcard src/*.cpp)     # Pliki źródłowe
 ELF_FILE = main.elf            # Plik ELF
 HEX_FILE = main.hex            # Plik HEX
 

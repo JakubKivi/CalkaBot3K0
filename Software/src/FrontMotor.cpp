@@ -1,13 +1,9 @@
 #include "../include/FrontMotor.h"
 
 // Konstruktor klasy
-FrontMotor::FrontMotor(volatile uint8_t* port, uint8_t pin) : port(port), pin(pin) {
-    setPinAsOutput(); // Ustawienie pinu jako wyjściowy
-}
-
-// Ustawienie pinu jako wyjściowy
-void FrontMotor::setPinAsOutput() {
-    *port |= (1 << pin); // Ustawienie pinu jako wyjściowy
+FrontMotor::FrontMotor(volatile uint8_t* port, volatile uint8_t* ddr, uint8_t pin) : port(port), ddr(ddr), pin(pin) {
+   *ddr |= (1 << pin); // Ustawienie pinu jako wyjściowy
+   this->off();
 }
 
 // Włączenie silnika
