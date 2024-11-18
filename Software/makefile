@@ -6,7 +6,8 @@ AVRDUDE = avrdude               # Narzędzie do programowania
 PORT = COM6                     # Port, do którego podłączony jest mikrokontroler
 BAUD = 115200                   # Prędkość transmisji
 CFLAGS = -mmcu=$(MCU) -Os -DF_CPU=16000000L  # Flagi kompilacji, zdefiniowanie F_CPU na 16 kHz
-SRC_FILES = $(wildcard src/*.cpp)     # Pliki źródłowe
+CXXFLAGS = $(CFLAGS)-IC:/dev/SoftPWM/src
+SRC_FILES = $(wildcard src/*.cpp) $(wildcard libs/**/*.cpp)    # Pliki źródłowe
 ELF_FILE = main.elf            # Plik ELF
 HEX_FILE = main.hex            # Plik HEX
 
@@ -15,7 +16,7 @@ all: $(HEX_FILE) clean
 
 # Kompilacja do pliku ELF
 $(ELF_FILE): $(SRC_FILES)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CXXFLAGS) -o $@ $^
 
 # Konwersja do pliku HEX
 $(HEX_FILE): $(ELF_FILE)
@@ -24,7 +25,6 @@ $(HEX_FILE): $(ELF_FILE)
 # Flashowanie mikrokontrolera
 flash: $(HEX_FILE)
 	$(AVRDUDE) -c arduino -p $(MCU) -P $(PORT) -b $(BAUD) -U flash:w:$<:i
-
 
 # Cel do czyszczenia
 clean:

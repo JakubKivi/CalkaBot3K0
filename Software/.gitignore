@@ -4,3 +4,6 @@
 
 # Ignorowanie folderu .vscode
 .vscode/
+
+#Ignorowanie PlatformIO
+.pio

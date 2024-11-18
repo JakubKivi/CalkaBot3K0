@@ -26,7 +26,7 @@ uint8_t InputManager::readPin(uint8_t pin) {
 uint8_t InputManager::readDecimalValue() {
     uint8_t value = 0;
     for (uint8_t i = 0; i < 4; ++i) {
-        value |= (readPin(pins[3-i]) << i);
+        value |= (readPin(pins[i]) << i);
     }
     return value; // Zwraca wartość dziesiętną
 }

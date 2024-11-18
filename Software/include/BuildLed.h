@@ -18,6 +18,7 @@ public:
 
     void on();
     void off();
+    void toggle();
 
     // Metoda do migania w pętli (KillError)
     void killError(uint8_t n);

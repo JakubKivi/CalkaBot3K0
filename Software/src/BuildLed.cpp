@@ -20,6 +20,10 @@ void BuildLed::off(){           // Wyłącz LED
     *(port) &= ~(1 << pin); 
 }
 
+void BuildLed::toggle(){
+    *(port) ^= (1 << pin);
+}
+
 // Metoda KillError - nieskończona pętla migania
 void BuildLed::killError(uint8_t n) {
     while (1) {
@@ -34,15 +38,15 @@ void BuildLed::killError(uint8_t n) {
 }
 
 // Metoda ShowError - miganie w tle przy pomocy przerwań
-void BuildLed::showError(uint8_t n) {
-    this->error_count = n;
+// void BuildLed::showError(uint8_t n) {
+//     this->error_count = n;
 
-    // Konfiguracja timera do generowania przerwań co 200ms (prescaler 256)
-    TCCR1B |= (1 << WGM12) | (1 << CS12);  // Tryb CTC, prescaler 256
-    OCR1A = 17500;                          // Czas trwania przerwania (zakładając 16MHz zegar)
-    TIMSK1 |= (1 << OCIE1A);               // Włączenie przerwań dla Compare Match
-    sei();                                 // Włączenie przerwań globalnych
-}
+//     // Konfiguracja timera do generowania przerwań co 200ms (prescaler 256)
+//     TCCR1B |= (1 << WGM12) | (1 << CS12);  // Tryb CTC, prescaler 256
+//     OCR1A = 17500;                          // Czas trwania przerwania (zakładając 16MHz zegar)
+//     TIMSK1 |= (1 << OCIE1A);               // Włączenie przerwań dla Compare Match
+//     sei();                                 // Włączenie przerwań globalnych
+// }
 
 // Metoda dostępu do zmiennej error_count
 uint8_t BuildLed::getErrorCount() const {
@@ -75,29 +79,29 @@ uint8_t BuildLed::getActivePin() {
     return 0xFF;  // Jeśli aktywny obiekt jest null
 }
 
-// Przerwanie Timer1 Compare Match - obsługuje miganie w ShowError
-ISR(TIMER1_COMPA_vect) {
-    static uint8_t blink_counter = 0;
-    static uint16_t wait_counter = 0;
+// // Przerwanie Timer1 Compare Match - obsługuje miganie w ShowError
+// ISR(TIMER1_COMPA_vect) {
+//     static uint8_t blink_counter = 0;
+//     static uint16_t wait_counter = 0;
 
-    // Dostęp do aktywnej instancji BuildLed
-    BuildLed* led = BuildLed::getActiveLed();  // Pobranie wskaźnika na aktywny obiekt
+//     // Dostęp do aktywnej instancji BuildLed
+//     BuildLed* led = BuildLed::getActiveLed();  // Pobranie wskaźnika na aktywny obiekt
 
-    if (led != 0 ) {
-        if (blink_counter < 2 * led->getErrorCount() && wait_counter==0 ) {
-            if (blink_counter % 2 == 0) {
-                *(led->getActivePort()) |= (1 << led->getActivePin());  // Włącz LED
-            } else {
-                *(led->getActivePort()) &= ~(1 << led->getActivePin());  // Wyłącz LED
-            }
-            blink_counter++;
-        } else {
-            blink_counter = 0;
-            wait_counter++;
-            if (wait_counter >= 10) {  // 200ms * 10 (2 sekundy)
-                *(led->getActivePort()) &= ~(1 << led->getActivePin());  // Wyłącz LED
-                wait_counter =0;
-            }
-        }
-    } 
-}
+//     if (led != 0 ) {
+//         if (blink_counter < 2 * led->getErrorCount() && wait_counter==0 ) {
+//             if (blink_counter % 2 == 0) {
+//                 *(led->getActivePort()) |= (1 << led->getActivePin());  // Włącz LED
+//             } else {
+//                 *(led->getActivePort()) &= ~(1 << led->getActivePin());  // Wyłącz LED
+//             }
+//             blink_counter++;
+//         } else {
+//             blink_counter = 0;
+//             wait_counter++;
+//             if (wait_counter >= 10) {  // 200ms * 10 (2 sekundy)
+//                 *(led->getActivePort()) &= ~(1 << led->getActivePin());  // Wyłącz LED
+//                 wait_counter =0;
+//             }
+//         }
+//     } 
+// }
