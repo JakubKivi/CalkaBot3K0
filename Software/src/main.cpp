@@ -29,15 +29,41 @@ void setup() {
   Palatis::SoftPWM.begin(200);  //SoftPWM init z częstotliwością 200Hz
   Palatis::SoftPWM.set(0, 100); // Kanał 0 (pin 13): wartość 50
   Palatis::SoftPWM.set(1, 100); // Kanał 1 (pin 12): wartość 50
-  calkaBot.forward();
   Serial.begin(9600);
 }
 
 void loop() {
+
+  switch (inputManager.readDecimalValue())
+  {
+    case 0:
+        errorLED.off();
+        if (front.read()>500)
+        {
+            calkaBot.backward();
+            _delay_ms(200);
+            calkaBot.rightTurn();
+            _delay_ms(200);
+        }else{
+            calkaBot.forward();
+        }
+    break;
+    case 1:
+        calkaBot.stop();
+        errorLED.toggle();
+        frontMotor.toggle();
+        _delay_ms(2000);
+    break;
+
+    default:
+        calkaBot.stop();
+        Serial.println("Floor L: "+String(floorLeft.read()) + " R: "+String(floorRight.read())+ "   Front: "+ String(front.read())+ "      Inputs: "+String(inputManager.readDecimalValue()));
+        delay(500);
+        errorLED.toggle();
+    break;
+  }
   
-  Serial.println("Floor L: "+String(floorLeft.read()) + " R: "+String(floorRight.read())+ "   Front: "+ String(front.read())+ "      Inputs: "+String(inputManager.readDecimalValue()));
-  delay(500);
-  errorLED.toggle();
+  
 
   // if (front.read()>500)
   // {
