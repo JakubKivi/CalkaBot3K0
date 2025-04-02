@@ -23,7 +23,7 @@ SOFTPWM_DEFINE_CHANNEL(0, ROBOT_RIGHT_DDR, ROBOT_RIGHT_PORT, ROBOT_RIGHT_PIN);  
 SOFTPWM_DEFINE_CHANNEL(1, ROBOT_LEFT_DDR, ROBOT_LEFT_PORT, ROBOT_LEFT_PIN);      // Soft PWM na Pin 12
 SOFTPWM_DEFINE_OBJECT_WITH_PWM_LEVELS(2, 255);                                   // Makra dla SoftPWM
 
-Robot calkaBot(&DDRB, &PORTB, PB3, PB1, PB2, PB0);                      // Silniki w kołach
+Robot calkaBot(&DDRB, &PORTB, PB3, PB0, PB2, PB1);                      // Silniki w kołach
 InputManager inputManager(&PORTD, &DDRD, &PIND, PD4, PD5, PD6, PD7);    // Switche na płytce
 FrontMotor frontMotor(&PORTD, &DDRD, PD3);                              // Sterowanie ramionami
 BuildLed errorLED(&PORTC, &DDRC, PC5);                                  // Wbudowana dioda informacyjna
@@ -52,8 +52,20 @@ void loop() {
         case 0:
             frontMotor.off();
             calkaBot.stop();
+            _delay_ms(100);
         break;
+        
+        case 1:
 
+        frontMotor.on();
+        //calkaBot.forward();
+        errorLED.on();
+        _delay_ms(500);
+        frontMotor.off();
+        calkaBot.stop();
+        errorLED.off();
+        _delay_ms(2000);
+    break;
         
         case 7:
             frontMotor.off();
