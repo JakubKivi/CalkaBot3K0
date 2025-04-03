@@ -2,6 +2,8 @@
 #define ROBOT_H
 
 #include <avr/io.h>
+#include "FrontMotor.h"
+
 // Dodaj odpowiednią bibliotekę do obsługi PWM
 
 #define ROBOT_RIGHT_DDR DDRB
@@ -26,6 +28,7 @@ public:
           uint8_t pinForwardL, uint8_t pinForwardR, uint8_t pinBackwardL, uint8_t pinBackwardR);
 
     void setSpeed(uint8_t speed1, uint8_t speed2);
+
     void forward();
     void backward();
     void leftTurn();
@@ -33,6 +36,8 @@ public:
     void leftCurve();
     void rightCurve();
     void stop();
+
+    void position(FrontMotor* frontMotor, int time, bool direction); // 0 - left, 1 - right
 };
 
 #endif

@@ -13,11 +13,12 @@
 #define FRONT_LEFT_THRESHOLD 200
 
 #define LINE_DETCTION_TURN_LENGHT 200 
-#define LINE_DETCTION_BACKWARD_LENGHT 150
+#define LINE_DETCTION_BACKWARD_LENGHT 250
 
 #define ALIGNMENT_TURN_LENGHT 100
-#define BACKWARDS_ALIGNMENT_TURN_LENGHT 300
 
+#define SEARCH_RIGHT 110 
+#define SEARCH_LEFT 100
 
 SOFTPWM_DEFINE_CHANNEL(0, ROBOT_RIGHT_DDR, ROBOT_RIGHT_PORT, ROBOT_RIGHT_PIN);   // Soft PWM na Pin 13
 SOFTPWM_DEFINE_CHANNEL(1, ROBOT_LEFT_DDR, ROBOT_LEFT_PORT, ROBOT_LEFT_PIN);      // Soft PWM na Pin 12
@@ -40,140 +41,115 @@ void setup() {
   Palatis::SoftPWM.set(0, 100); // Kanał 0 (pin 13): wartość 100
   Palatis::SoftPWM.set(1, 100); // Kanał 1 (pin 12): wartość 100
 
+  pinMode(2, INPUT_PULLUP);
   Serial.begin(9600);
+
+  delay(5000);
 }
 
 bool positioned = false;
 
 bool curve = true;
 
-
-
 void loop() {
+    if (digitalRead(2))
+    {  
+        switch (inputManager.readDecimalValue())
+        {
+            case 0:
+                positioned = false;
+                frontMotor.off();
+                calkaBot.stop();
+                _delay_ms(100);
+            break;
+            
 
-    switch (inputManager.readDecimalValue())
-    {
-        case 0:
-            frontMotor.off();
-            calkaBot.stop();
-            _delay_ms(100);
-        break;
-        
-        case 1:
-            errorLED.on();
-            _delay_ms(3000);
-            errorLED.off();
-            frontMotor.on();
-            calkaBot.leftTurn();
-            _delay_ms(320);
-            calkaBot.stop();
-            frontMotor.off();
-            _delay_ms(10000);
-        break;
-        
-        case 2:
-            errorLED.on();
-            _delay_ms(3000);
-            errorLED.off();
-            frontMotor.on();
-            calkaBot.leftTurn();
-            _delay_ms(350);
-            calkaBot.stop();
-            frontMotor.off();
-            _delay_ms(10000);
-        break;
-        
-        case 3:
-            errorLED.on();
-            _delay_ms(3000);
-            errorLED.off();
-            frontMotor.on();
-            calkaBot.leftTurn();
-            _delay_ms(400);
-            calkaBot.stop();
-            frontMotor.off();
-            _delay_ms(10000);
-        break;
-
-        case 9:
-            errorLED.on();
-            _delay_ms(3000);
-            errorLED.off();
-            frontMotor.on();
-            calkaBot.rightTurn();
-            _delay_ms(320);
-            calkaBot.stop();
-            frontMotor.off();
-            _delay_ms(10000);
-        break;
-        
-        case 10:
-            errorLED.on();
-            _delay_ms(3000);
-            errorLED.off();
-            frontMotor.on();
-            calkaBot.rightTurn();
-            _delay_ms(350);
-            calkaBot.stop();
-            frontMotor.off();
-            _delay_ms(10000);
-        break;
-        
-        case 11:
-            errorLED.on();
-            _delay_ms(3000);
-            errorLED.off();
-            frontMotor.on();
-            calkaBot.rightTurn();
-            _delay_ms(400);
-            calkaBot.stop();
-            frontMotor.off();
-            _delay_ms(10000);
-        break;
-
-        break;
-
-        case 15:
-            if (front.read()>FRONT_THRESHOLD)
-            {
-                calkaBot.forward();
-            }else if(right.read()>FRONT_RIGHT_THRESHOLD){
-                calkaBot.rightCurve();
-            }else if(left.read()>FRONT_LEFT_THRESHOLD){
-                calkaBot.leftCurve();
-            }else{
-                if (inputManager.readPin(PD6))        //Przeszukiwanie włączone
+            case 1:
+            case 2:
+            case 3:         //lewo bez szukania
+            case 5:
+            case 6:
+            case 7:         //prawo bez szukania
+            case 9:
+            case 10:
+            case 11:        //lewo z szukaniem
+            case 13:
+            case 14:
+            case 15:        //prawo z szukaniem
+                if (!positioned)
                 {
-                    if (floorLeft.read() < LEFT_FLOOR_THRESHOLD || floorRight.read() < RIGHT_FLOOR_THRESHOLD)
-                    {
-                        calkaBot.backward();
-                        _delay_ms(200);
-                        calkaBot.rightTurn();
-                        _delay_ms(200);
-                    }else{
-                        curve ? calkaBot.leftCurve() : calkaBot.rightCurve();
-                        curve = !curve;
-                        _delay_ms(100);
-                        calkaBot.stop();
-                        _delay_ms(100);
-                    }
+                    int positioningTime = 1;
+                    if(inputManager.readPin(PD4)) positioningTime+=1;
+                    if(inputManager.readPin(PD5)) positioningTime+=2;
+                    calkaBot.position(&frontMotor, positioningTime, inputManager.readPin(PD6));
+                    positioned = true; 
+
                 }else{
-                    calkaBot.stop();
+                    frontMotor.on();
+
+                    if (front.read()>FRONT_THRESHOLD)
+                    {
+                        calkaBot.forward();
+                    }else if(right.read() > FRONT_RIGHT_THRESHOLD){
+                        calkaBot.rightCurve();
+                    }else if(left.read() > FRONT_LEFT_THRESHOLD){
+                        calkaBot.leftCurve();
+                    }else{
+                        if (inputManager.readPin(PD7))        //Przeszukiwanie włączone
+                        {
+                            if (floorLeft.read() < LEFT_FLOOR_THRESHOLD || floorRight.read() < RIGHT_FLOOR_THRESHOLD)
+                            {
+                                calkaBot.backward();
+                                _delay_ms(LINE_DETCTION_BACKWARD_LENGHT);
+                                calkaBot.rightTurn();
+                                _delay_ms(LINE_DETCTION_TURN_LENGHT);
+                            }else{
+                                if (curve)
+                                {
+                                    calkaBot.leftCurve();
+                                    _delay_ms(SEARCH_LEFT);
+                                }else{
+                                    calkaBot.rightCurve();
+                                    _delay_ms(SEARCH_RIGHT);
+                                }
+                                curve = !curve;
+                                calkaBot.stop();
+                                _delay_ms(100);
+                            }
+                        }else{
+                            calkaBot.stop();
+                        }
+                    }
                 }
-            }
-        break;
+            break;
 
-        default:
+            case 4:
+            case 8:
+            case 12:            
+                frontMotor.off();
+                calkaBot.forward();
+                errorLED.toggle();
+                _delay_ms(100);
+            break;
+            
+            default:
+                positioned = false;
+                frontMotor.off();
+                calkaBot.stop();
+                errorLED.toggle();
+                _delay_ms(100);
+            break;
+        }
+    }else{
+        positioned = false;
         frontMotor.off();
-        calkaBot.forward();
-        errorLED.off();
+        calkaBot.stop();
+        errorLED.toggle();
         _delay_ms(100);
-        break;
-        
     }
+}
 
-
-    // ===================================== INŻYNIERKA ============================ //
+    // ===================================== INŻYNIERKA ====================(tak z błędami, późno było xd)======== //
     // while (!positioned)
     // {
     //     if (digitalRead(2))   // Sygnał startowy na złączu J6
@@ -237,4 +213,3 @@ void loop() {
         
     // }
 
-}

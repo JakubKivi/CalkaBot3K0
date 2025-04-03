@@ -1,4 +1,6 @@
 #include "../include/Robot.h"
+#include "FrontMotor.h"
+#include <Arduino.h>
 
 
 Robot::Robot(volatile uint8_t* ddr, volatile uint8_t* port, 
@@ -45,14 +47,33 @@ void Robot::stop() {
              | (1 << pinBackwardL) | (1 << pinBackwardR));
 }
 
-void Robot::rightCurve() {
+void Robot::leftCurve() {
     // Lewe koło porusza się do przodu, prawe koło zatrzymane
     *port |= (1 << pinForwardL); // Włącz napęd lewego koła do przodu
     *port &= ~((1 << pinBackwardL) | (1 << pinForwardR) | (1 << pinBackwardR)); // Wyłącz inne kierunki
 }
 
-void Robot::leftCurve() {
+void Robot::rightCurve() {
     // Prawe koło porusza się do przodu, lewe koło zatrzymane
     *port |= (1 << pinForwardR); // Włącz napęd prawego koła do przodu
     *port &= ~((1 << pinBackwardR) | (1 << pinForwardL) | (1 << pinBackwardL)); // Wyłącz inne kierunki
+}
+
+void Robot::position(FrontMotor* frontMotor, int time, bool direction){
+    
+    frontMotor->on();
+    direction ? rightTurn() : leftTurn();
+    switch (time)
+    {
+        case 1:
+            _delay_ms(300);
+        break;
+        case 2:
+            _delay_ms(350);
+        break;
+        default:
+            _delay_ms(400);
+        break;
+    }
+    stop();
 }
