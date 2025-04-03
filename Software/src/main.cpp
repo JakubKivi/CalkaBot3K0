@@ -33,6 +33,8 @@ Sensor front(3);                                                        // Czujn
 Sensor left(2);                                                         // Czujnik przeciwnika, lewy
 Sensor right(4);                                                        // Czujnik przeciwnika, prawy
 
+
+
 void setup() {
   Palatis::SoftPWM.begin(200);  // inicjalizacja SoftPWM z częstotliwością 200Hz
   Palatis::SoftPWM.set(0, 100); // Kanał 0 (pin 13): wartość 100
@@ -45,6 +47,8 @@ bool positioned = false;
 
 bool curve = true;
 
+
+
 void loop() {
 
     switch (inputManager.readDecimalValue())
@@ -56,35 +60,80 @@ void loop() {
         break;
         
         case 1:
-
-        frontMotor.on();
-        //calkaBot.forward();
-        errorLED.on();
-        _delay_ms(500);
-        frontMotor.off();
-        calkaBot.stop();
-        errorLED.off();
-        _delay_ms(2000);
-    break;
-        
-        case 7:
-            frontMotor.off();
-            calkaBot.stop();
-            _delay_ms(5000);
+            errorLED.on();
+            _delay_ms(3000);
+            errorLED.off();
             frontMotor.on();
-            calkaBot.forward();
-            _delay_ms(2000);
+            calkaBot.leftTurn();
+            _delay_ms(320);
+            calkaBot.stop();
+            frontMotor.off();
+            _delay_ms(10000);
+        break;
+        
+        case 2:
+            errorLED.on();
+            _delay_ms(3000);
+            errorLED.off();
+            frontMotor.on();
+            calkaBot.leftTurn();
+            _delay_ms(350);
+            calkaBot.stop();
+            frontMotor.off();
+            _delay_ms(10000);
+        break;
+        
+        case 3:
+            errorLED.on();
+            _delay_ms(3000);
+            errorLED.off();
+            frontMotor.on();
+            calkaBot.leftTurn();
+            _delay_ms(400);
+            calkaBot.stop();
+            frontMotor.off();
+            _delay_ms(10000);
+        break;
+
+        case 9:
+            errorLED.on();
+            _delay_ms(3000);
+            errorLED.off();
+            frontMotor.on();
+            calkaBot.rightTurn();
+            _delay_ms(320);
+            calkaBot.stop();
+            frontMotor.off();
+            _delay_ms(10000);
+        break;
+        
+        case 10:
+            errorLED.on();
+            _delay_ms(3000);
+            errorLED.off();
+            frontMotor.on();
+            calkaBot.rightTurn();
+            _delay_ms(350);
+            calkaBot.stop();
+            frontMotor.off();
+            _delay_ms(10000);
+        break;
+        
+        case 11:
+            errorLED.on();
+            _delay_ms(3000);
+            errorLED.off();
+            frontMotor.on();
+            calkaBot.rightTurn();
+            _delay_ms(400);
+            calkaBot.stop();
+            frontMotor.off();
+            _delay_ms(10000);
         break;
 
         break;
+
         case 15:
-        frontMotor.off();
-        calkaBot.stop();
-            errorLED.toggle();
-            _delay_ms(200);
-        break;
-
-        default:
             if (front.read()>FRONT_THRESHOLD)
             {
                 calkaBot.forward();
@@ -93,7 +142,7 @@ void loop() {
             }else if(left.read()>FRONT_LEFT_THRESHOLD){
                 calkaBot.leftCurve();
             }else{
-                if (inputManager.readPin(PD7))        //Przeszukiwanie włączone
+                if (inputManager.readPin(PD6))        //Przeszukiwanie włączone
                 {
                     if (floorLeft.read() < LEFT_FLOOR_THRESHOLD || floorRight.read() < RIGHT_FLOOR_THRESHOLD)
                     {
@@ -112,11 +161,15 @@ void loop() {
                     calkaBot.stop();
                 }
             }
-            // calkaBot.stop();
-            // Serial.println("Floor L: "+String(floorLeft.read()) + " R: "+String(floorRight.read())+ "   Front: "+ String(front.read())+ "      Inputs: "+String(inputManager.readDecimalValue()));
-            // delay(500);
-            // errorLED.toggle();
         break;
+
+        default:
+        frontMotor.off();
+        calkaBot.forward();
+        errorLED.off();
+        _delay_ms(100);
+        break;
+        
     }
 
 

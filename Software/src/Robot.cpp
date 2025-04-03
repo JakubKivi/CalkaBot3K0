@@ -30,12 +30,12 @@ void Robot::backward() {
     *port &= ~((1 << pinForwardL) | (1 << pinForwardR));
 }
 
-void Robot::leftTurn() {
+void Robot::rightTurn() {
     *port |= (1 << pinForwardL) | (1 << pinBackwardR);
     *port &= ~((1 << pinBackwardL) | (1 << pinForwardR));
 }
 
-void Robot::rightTurn() {
+void Robot::leftTurn() {
     *port |= (1 << pinForwardR) | (1 << pinBackwardL);
     *port &= ~((1 << pinForwardL) | (1 << pinBackwardR));
 }
@@ -45,13 +45,13 @@ void Robot::stop() {
              | (1 << pinBackwardL) | (1 << pinBackwardR));
 }
 
-void Robot::leftCurve() {
+void Robot::rightCurve() {
     // Lewe koło porusza się do przodu, prawe koło zatrzymane
     *port |= (1 << pinForwardL); // Włącz napęd lewego koła do przodu
     *port &= ~((1 << pinBackwardL) | (1 << pinForwardR) | (1 << pinBackwardR)); // Wyłącz inne kierunki
 }
 
-void Robot::rightCurve() {
+void Robot::leftCurve() {
     // Prawe koło porusza się do przodu, lewe koło zatrzymane
     *port |= (1 << pinForwardR); // Włącz napęd prawego koła do przodu
     *port &= ~((1 << pinBackwardR) | (1 << pinForwardL) | (1 << pinBackwardL)); // Wyłącz inne kierunki
