@@ -62,18 +62,37 @@ void Robot::rightCurve() {
 void Robot::position(FrontMotor* frontMotor, int time, bool direction){
     
     frontMotor->on();
-    direction ? rightTurn() : leftTurn();
-    switch (time)
+    if (direction)
     {
-        case 1:
-            _delay_ms(300);
-        break;
-        case 2:
-            _delay_ms(350);
-        break;
-        default:
-            _delay_ms(400);
-        break;
+        rightTurn();
+        switch (time)
+        {
+            case 1:
+                _delay_ms(450);
+            break;
+            case 2:
+                _delay_ms(500);
+            break;
+            default:
+                _delay_ms(550);
+            break;
+        }
+    }else{
+        leftTurn();
+        switch (time)
+        {
+            case 1:
+                _delay_ms(200);
+            break;
+            case 2:
+                _delay_ms(250);
+            break;
+            default:
+                _delay_ms(300);
+            break;
+        }
     }
+    
+    
     stop();
 }

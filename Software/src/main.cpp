@@ -78,6 +78,7 @@ void loop() {
             case 15:        //prawo z szukaniem
                 if (!positioned)
                 {
+                    delay(3000);
                     int positioningTime = 1;
                     if(inputManager.readPin(PD4)) positioningTime+=1;
                     if(inputManager.readPin(PD5)) positioningTime+=2;
