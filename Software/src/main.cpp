@@ -10,7 +10,11 @@
 
 #define FRONT_THRESHOLD 250
 #define FRONT_RIGHT_THRESHOLD 200
-#define FRONT_LEFT_THRESHOLD 200
+#define FRONT_LEFT_THRESHOLD 250
+
+#define FRONT_FULLSPEED_THRESHOLD 500
+#define FULL_SPEED  255
+#define SEARCH_SPEED 50
 
 #define LINE_DETCTION_TURN_LENGHT 200 
 #define LINE_DETCTION_BACKWARD_LENGHT 250
@@ -31,15 +35,13 @@ BuildLed errorLED(&PORTC, &DDRC, PC5);                                  // Wbudo
 Sensor floorLeft(0);                                                    // Czujnik linii, lewy
 Sensor floorRight(1);                                                   // Czujnik linii, prawy
 Sensor front(3);                                                        // Czujnik przeciwnika, środkowy
-Sensor left(2);                                                         // Czujnik przeciwnika, lewy
-Sensor right(4);                                                        // Czujnik przeciwnika, prawy
+Sensor left(4);                                                         // Czujnik przeciwnika, lewy
+Sensor right(2);                                                        // Czujnik przeciwnika, prawy
 
 
 
 void setup() {
   Palatis::SoftPWM.begin(200);  // inicjalizacja SoftPWM z częstotliwością 200Hz
-  Palatis::SoftPWM.set(0, 100); // Kanał 0 (pin 13): wartość 100
-  Palatis::SoftPWM.set(1, 100); // Kanał 1 (pin 12): wartość 100
 
   pinMode(2, INPUT_PULLUP);
   Serial.begin(9600);
@@ -52,19 +54,45 @@ bool positioned = false;
 bool curve = true;
 
 void loop() {
-    if (digitalRead(2))
-    {  
+
+
+    if(front.read() > FRONT_FULLSPEED_THRESHOLD){           //NA BLISKO RURA!
+        Palatis::SoftPWM.set(0, FULL_SPEED); 
+        Palatis::SoftPWM.set(1, FULL_SPEED); 
+    }else{
+        Palatis::SoftPWM.set(0, SEARCH_SPEED); 
+        Palatis::SoftPWM.set(1, SEARCH_SPEED); 
+    }
+
+
+    if (digitalRead(2)){  
         switch (inputManager.readDecimalValue())
         {
             case 0:
                 positioned = false;
-                frontMotor.off();
                 calkaBot.stop();
-                _delay_ms(100);
+                Serial.println("Left: "+ String(left.read()) + "    Mid: " + String(front.read()) +"       Right: " + String(right.read() ));
+                
+                if (front.read() > FRONT_THRESHOLD or right.read() > FRONT_RIGHT_THRESHOLD or left.read() > FRONT_LEFT_THRESHOLD)
+                {
+                    errorLED.on();
+                }else{
+                    errorLED.off();
+                }
+                calkaBot.rightCurve();
+                    
+                frontMotor.off();
+
+                _delay_ms(500);
             break;
             
 
             case 1:
+                calkaBot.forward();
+                frontMotor.off();
+
+                _delay_ms(500);
+
             case 2:
             case 3:         //lewo bez szukania
             case 5:
