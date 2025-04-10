@@ -1,28 +1,12 @@
-#include "../include/FrontMotor.h"  //Dołączenie plików nagłówkowycg
+#include "../include/config.h"
+#include "../include/FrontMotor.h"  
 #include "../include/InputManager.h"
 #include "../include/BuildLED.h"
 #include "../include/Sensor.h"
 #include "../include/Robot.h"
 #include "../lib/SoftPWM.h"
 
-#define LEFT_FLOOR_THRESHOLD 100
-#define RIGHT_FLOOR_THRESHOLD 100
 
-#define FRONT_THRESHOLD 250
-#define FRONT_RIGHT_THRESHOLD 200
-#define FRONT_LEFT_THRESHOLD 250
-
-#define FRONT_FULLSPEED_THRESHOLD 500
-#define FULL_SPEED  255
-#define SEARCH_SPEED 50
-
-#define LINE_DETCTION_TURN_LENGHT 200 
-#define LINE_DETCTION_BACKWARD_LENGHT 250
-
-#define ALIGNMENT_TURN_LENGHT 100
-
-#define SEARCH_RIGHT 110 
-#define SEARCH_LEFT 100
 
 SOFTPWM_DEFINE_CHANNEL(0, ROBOT_RIGHT_DDR, ROBOT_RIGHT_PORT, ROBOT_RIGHT_PIN);   // Soft PWM na Pin 13
 SOFTPWM_DEFINE_CHANNEL(1, ROBOT_LEFT_DDR, ROBOT_LEFT_PORT, ROBOT_LEFT_PIN);      // Soft PWM na Pin 12
@@ -31,22 +15,25 @@ SOFTPWM_DEFINE_OBJECT_WITH_PWM_LEVELS(2, 255);                                  
 Robot calkaBot(&DDRB, &PORTB, PB3, PB0, PB2, PB1);                      // Silniki w kołach
 InputManager inputManager(&PORTD, &DDRD, &PIND, PD4, PD5, PD6, PD7);    // Switche na płytce
 FrontMotor frontMotor(&PORTD, &DDRD, PD3);                              // Sterowanie ramionami
-BuildLed errorLED(&PORTC, &DDRC, PC5);                                  // Wbudowana dioda informacyjna
-Sensor floorLeft(0);                                                    // Czujnik linii, lewy
-Sensor floorRight(1);                                                   // Czujnik linii, prawy
-Sensor front(3);                                                        // Czujnik przeciwnika, środkowy
-Sensor left(4);                                                         // Czujnik przeciwnika, lewy
-Sensor right(2);                                                        // Czujnik przeciwnika, prawy
+BuildLed buildLed(&PORTC, &DDRC, PC5);                                  // Wbudowana dioda informacyjna
 
+Sensor floorLeft(0);                                                    // Czujniki linii, lewy
+Sensor floorRight(1);                                                   //               , prawy
+
+Sensor front(3);                                                        // Czujniki przeciwnika , środkowy
+Sensor left(4);                                                         //                      , lewy
+Sensor right(2);                                                        //                      , prawy
 
 
 void setup() {
-  Palatis::SoftPWM.begin(200);  // inicjalizacja SoftPWM z częstotliwością 200Hz
+    Palatis::SoftPWM.begin(200);  
+    Palatis::SoftPWM.set(0, FULL_SPEED); 
+    Palatis::SoftPWM.set(1, FULL_SPEED);    //dla pozycjonowania na starcie
 
-  pinMode(2, INPUT_PULLUP);
-  Serial.begin(9600);
 
-  delay(5000);
+    pinMode(2, INPUT_PULLUP);
+    Serial.begin(9600);
+
 }
 
 bool positioned = false;
@@ -54,46 +41,29 @@ bool positioned = false;
 bool curve = true;
 
 void loop() {
-
-
-    if(front.read() > FRONT_FULLSPEED_THRESHOLD){           //NA BLISKO RURA!
-        Palatis::SoftPWM.set(0, FULL_SPEED); 
-        Palatis::SoftPWM.set(1, FULL_SPEED); 
-    }else{
-        Palatis::SoftPWM.set(0, SEARCH_SPEED); 
-        Palatis::SoftPWM.set(1, SEARCH_SPEED); 
-    }
-
-
     if (digitalRead(2)){  
         switch (inputManager.readDecimalValue())
         {
             case 0:
                 positioned = false;
                 calkaBot.stop();
+                frontMotor.off();
                 Serial.println("Left: "+ String(left.read()) + "    Mid: " + String(front.read()) +"       Right: " + String(right.read() ));
                 
                 if (front.read() > FRONT_THRESHOLD or right.read() > FRONT_RIGHT_THRESHOLD or left.read() > FRONT_LEFT_THRESHOLD)
                 {
-                    errorLED.on();
+                    buildLed.on();
                 }else{
-                    errorLED.off();
+                    buildLed.off();
                 }
-                calkaBot.rightCurve();
-                    
-                frontMotor.off();
-
                 _delay_ms(500);
             break;
             
 
+
             case 1:
-                calkaBot.forward();
-                frontMotor.off();
-
-                _delay_ms(500);
-
-            case 2:
+            break;
+            case 2:                    
             case 3:         //lewo bez szukania
             case 5:
             case 6:
@@ -110,11 +80,18 @@ void loop() {
                     int positioningTime = 1;
                     if(inputManager.readPin(PD4)) positioningTime+=1;
                     if(inputManager.readPin(PD5)) positioningTime+=2;
-                    calkaBot.position(&frontMotor, positioningTime, inputManager.readPin(PD6));
+                    calkaBot.position(&frontMotor, &left, &front, &right, positioningTime, inputManager.readPin(PD6));
                     positioned = true; 
 
                 }else{
-                    frontMotor.on();
+
+                    if(front.read() > FRONT_FULLSPEED_THRESHOLD){           //NA BLISKO RURA!
+                        Palatis::SoftPWM.set(0, FULL_SPEED); 
+                        Palatis::SoftPWM.set(1, FULL_SPEED); 
+                    }else{
+                        Palatis::SoftPWM.set(0, SEARCH_SPEED); 
+                        Palatis::SoftPWM.set(1, SEARCH_SPEED); 
+                    }
 
                     if (front.read()>FRONT_THRESHOLD)
                     {
@@ -124,7 +101,7 @@ void loop() {
                     }else if(left.read() > FRONT_LEFT_THRESHOLD){
                         calkaBot.leftCurve();
                     }else{
-                        if (inputManager.readPin(PD7))        //Przeszukiwanie włączone
+                        if (inputManager.readPin(PD7))        //Kręcenie włączone
                         {
                             if (floorLeft.read() < LEFT_FLOOR_THRESHOLD || floorRight.read() < RIGHT_FLOOR_THRESHOLD)
                             {
@@ -135,15 +112,13 @@ void loop() {
                             }else{
                                 if (curve)
                                 {
-                                    calkaBot.leftCurve();
-                                    _delay_ms(SEARCH_LEFT);
+                                    calkaBot.leftTurn();
+                                    _delay_ms(SEARCH_LEFT_CURVE);  //TODO sprawdzanie w trakcie
                                 }else{
-                                    calkaBot.rightCurve();
-                                    _delay_ms(SEARCH_RIGHT);
+                                    calkaBot.rightTurn();
+                                    _delay_ms(SEARCH_RIGHT_CURVE);
                                 }
                                 curve = !curve;
-                                calkaBot.stop();
-                                _delay_ms(100);
                             }
                         }else{
                             calkaBot.stop();
@@ -157,7 +132,7 @@ void loop() {
             case 12:            
                 frontMotor.off();
                 calkaBot.forward();
-                errorLED.toggle();
+                buildLed.toggle();
                 _delay_ms(100);
             break;
             
@@ -165,7 +140,7 @@ void loop() {
                 positioned = false;
                 frontMotor.off();
                 calkaBot.stop();
-                errorLED.toggle();
+                buildLed.toggle();
                 _delay_ms(100);
             break;
         }
@@ -173,12 +148,12 @@ void loop() {
         positioned = false;
         frontMotor.off();
         calkaBot.stop();
-        errorLED.toggle();
+        buildLed.toggle();
         _delay_ms(100);
     }
 }
 
-    // ===================================== INŻYNIERKA ====================(tak z błędami, późno było xd)======== //
+    // ===================================== INŻYNIERKA ====================(tak. z błędami. późno było xd ale padaka xd)======== //
     // while (!positioned)
     // {
     //     if (digitalRead(2))   // Sygnał startowy na złączu J6
