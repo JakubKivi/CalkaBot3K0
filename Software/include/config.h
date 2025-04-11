@@ -4,7 +4,8 @@
 #define LEFT_FLOOR_THRESHOLD 100        //Podłoża
 #define RIGHT_FLOOR_THRESHOLD 100
 
-#define LINE_DETCTION_TURN_LENGHT 200 
+#define LINE_DETCTION_RIGHT_TURN_LENGHT 200 
+#define LINE_DETCTION_LEFT_TURN_LENGHT 200 
 #define LINE_DETCTION_BACKWARD_LENGHT 250
 
 #define FRONT_THRESHOLD 250             //Przeciwnika
@@ -15,16 +16,16 @@
 #define FULL_SPEED  255
 #define SEARCH_SPEED 110                //prędkości przed i po thresholdzie
 
-#define POSITIONING_LEFT_TURN_1 200
-#define POSITIONING_LEFT_TURN_2 250
-#define POSITIONING_LEFT_TURN_3 300
+#define POSITIONING_LEFT_TURN_1 150
+#define POSITIONING_LEFT_TURN_2 200
+#define POSITIONING_LEFT_TURN_3 250
 
-#define POSITIONING_RIGHT_TURN_1 450
-#define POSITIONING_RIGHT_TURN_2 500
-#define POSITIONING_RIGHT_TURN_3 550             //długość obrotu przy positioningu
+#define POSITIONING_RIGHT_TURN_1 350
+#define POSITIONING_RIGHT_TURN_2 400
+#define POSITIONING_RIGHT_TURN_3 450             //długość obrotu przy positioningu
 
 
-#define SEARCH_RIGHT_CURVE 350            //Jak długo powinien skręcać w daną stronę podczas szukania
-#define SEARCH_LEFT_CURVE 480
+#define SEARCH_RIGHT_CURVE 120            //Jak długo powinien skręcać w daną stronę podczas szukania
+#define SEARCH_LEFT_CURVE 120
 
 #endif 

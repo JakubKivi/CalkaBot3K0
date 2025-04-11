@@ -104,7 +104,7 @@ void Robot::position(FrontMotor* frontMotor, Sensor* left, Sensor* front, Sensor
     while ( i < timeInMs ){
         delay(10);
         i+=10;
-        if(right->read() > FRONT_RIGHT_THRESHOLD && front->read()>FRONT_THRESHOLD && left->read() > FRONT_LEFT_THRESHOLD) //jak coś widzisz to przestań
+        if(right->read() > FRONT_RIGHT_THRESHOLD || front->read()>FRONT_THRESHOLD || left->read() > FRONT_LEFT_THRESHOLD) //jak coś widzisz to przestań
             break;
     }
     

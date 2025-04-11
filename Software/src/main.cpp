@@ -62,7 +62,6 @@ void loop() {
 
 
             case 1:
-            break;
             case 2:                    
             case 3:         //lewo bez szukania
             case 5:
@@ -93,30 +92,52 @@ void loop() {
                         Palatis::SoftPWM.set(1, SEARCH_SPEED); 
                     }
 
-                    if (front.read()>FRONT_THRESHOLD)
-                    {
+                    if (front.read()>FRONT_THRESHOLD){
                         calkaBot.forward();
+
                     }else if(right.read() > FRONT_RIGHT_THRESHOLD){
                         calkaBot.rightCurve();
+
                     }else if(left.read() > FRONT_LEFT_THRESHOLD){
                         calkaBot.leftCurve();
+
                     }else{
                         if (inputManager.readPin(PD7))        //Kręcenie włączone
                         {
-                            if (floorLeft.read() < LEFT_FLOOR_THRESHOLD || floorRight.read() < RIGHT_FLOOR_THRESHOLD)
+                            if (floorLeft.read() < LEFT_FLOOR_THRESHOLD)
                             {
                                 calkaBot.backward();
                                 _delay_ms(LINE_DETCTION_BACKWARD_LENGHT);
                                 calkaBot.rightTurn();
-                                _delay_ms(LINE_DETCTION_TURN_LENGHT);
+                                _delay_ms(LINE_DETCTION_RIGHT_TURN_LENGHT);
+
+                            }else if(floorRight.read() < RIGHT_FLOOR_THRESHOLD){
+                                calkaBot.backward();
+                                _delay_ms(LINE_DETCTION_BACKWARD_LENGHT);
+                                calkaBot.rightTurn();
+                                _delay_ms(LINE_DETCTION_LEFT_TURN_LENGHT);
+
                             }else{
-                                if (curve)
-                                {
+                                int i=0;
+                                if (curve){
                                     calkaBot.leftTurn();
-                                    _delay_ms(SEARCH_LEFT_CURVE);  //TODO sprawdzanie w trakcie
+                                    while (i < SEARCH_LEFT_CURVE){
+                                        delay(10);
+                                        i+=10;
+                                        if (right.read() > FRONT_RIGHT_THRESHOLD || front.read()>FRONT_THRESHOLD || left.read() > FRONT_LEFT_THRESHOLD)
+                                            break;
+                                        
+                                    } 
+
                                 }else{
                                     calkaBot.rightTurn();
-                                    _delay_ms(SEARCH_RIGHT_CURVE);
+                                    while (i < SEARCH_RIGHT_CURVE){
+                                        delay(10);
+                                        i+=10;
+                                        if (right.read() > FRONT_RIGHT_THRESHOLD || front.read()>FRONT_THRESHOLD || left.read() > FRONT_LEFT_THRESHOLD)
+                                            break;
+                                        
+                                    } 
                                 }
                                 curve = !curve;
                             }
