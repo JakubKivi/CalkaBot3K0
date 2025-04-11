@@ -67,7 +67,7 @@ void Robot::rightCurve() {
     *port &= ~((1 << pinBackwardL) | (1 << pinForwardR) | (1 << pinBackwardR)); 
 }
 
-void Robot::position(FrontMotor* frontMotor, Sensor* left, Sensor* front, Sensor* right, int time, bool direction){
+void Robot::position(Sensor* left, Sensor* front, Sensor* right, int time, bool direction){
     
     int timeInMs;
     if (direction)
@@ -108,6 +108,5 @@ void Robot::position(FrontMotor* frontMotor, Sensor* left, Sensor* front, Sensor
             break;
     }
     
-    frontMotor->on();
     stop();
 }

@@ -79,8 +79,9 @@ void loop() {
                     int positioningTime = 1;
                     if(inputManager.readPin(PD4)) positioningTime+=1;
                     if(inputManager.readPin(PD5)) positioningTime+=2;
-                    calkaBot.position(&frontMotor, &left, &front, &right, positioningTime, inputManager.readPin(PD6));
+                    calkaBot.position(&left, &front, &right, positioningTime, inputManager.readPin(PD6));
                     positioned = true; 
+                    frontMotor.on();
 
                 }else{
 

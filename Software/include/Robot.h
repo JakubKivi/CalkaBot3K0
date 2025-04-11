@@ -36,7 +36,7 @@ public:
     void rightCurve();
     void stop();
 
-    void position(FrontMotor* frontMotor, Sensor* left, Sensor* front, Sensor* right,  int time, bool direction); // 0 - left, 1 - right
+    void position(Sensor* left, Sensor* front, Sensor* right,  int time, bool direction); // 0 - left, 1 - right
 };
 
 #endif

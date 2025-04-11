@@ -16,16 +16,16 @@
 #define FULL_SPEED  255
 #define SEARCH_SPEED 110                //prędkości przed i po thresholdzie
 
-#define POSITIONING_LEFT_TURN_1 150
-#define POSITIONING_LEFT_TURN_2 200
-#define POSITIONING_LEFT_TURN_3 250
+#define POSITIONING_LEFT_TURN_1 100
+#define POSITIONING_LEFT_TURN_2 150
+#define POSITIONING_LEFT_TURN_3 200
 
-#define POSITIONING_RIGHT_TURN_1 350
-#define POSITIONING_RIGHT_TURN_2 400
-#define POSITIONING_RIGHT_TURN_3 450             //długość obrotu przy positioningu
+#define POSITIONING_RIGHT_TURN_1 150
+#define POSITIONING_RIGHT_TURN_2 200
+#define POSITIONING_RIGHT_TURN_3 250             //długość obrotu przy positioningu
 
 
-#define SEARCH_RIGHT_CURVE 120            //Jak długo powinien skręcać w daną stronę podczas szukania
-#define SEARCH_LEFT_CURVE 120
+#define SEARCH_RIGHT_CURVE 160            //Jak długo powinien skręcać w daną stronę podczas szukania
+#define SEARCH_LEFT_CURVE 160
 
 #endif 
