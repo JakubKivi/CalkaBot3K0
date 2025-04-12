@@ -8,7 +8,7 @@
 #define LEFT_FLOOR_THRESHOLD 100
 #define RIGHT_FLOOR_THRESHOLD 100
 
-#define FRONT_THRESHOLD 250
+#define FRONT_THRESHOLD 350
 #define FRONT_RIGHT_THRESHOLD 200
 #define FRONT_LEFT_THRESHOLD 200
 
@@ -41,10 +41,8 @@ void setup() {
   Palatis::SoftPWM.set(0, 100); // Kanał 0 (pin 13): wartość 100
   Palatis::SoftPWM.set(1, 100); // Kanał 1 (pin 12): wartość 100
 
-  pinMode(2, INPUT_PULLUP);
+  pinMode(2, INPUT);
   Serial.begin(9600);
-
-  delay(5000);
 }
 
 bool positioned = false;
@@ -58,6 +56,7 @@ void loop() {
         {
             case 0:
                 positioned = false;
+                Serial.println(analogRead(A4));
                 frontMotor.off();
                 calkaBot.stop();
                 _delay_ms(100);
@@ -78,7 +77,6 @@ void loop() {
             case 15:        //prawo z szukaniem
                 if (!positioned)
                 {
-                    delay(3000);
                     int positioningTime = 1;
                     if(inputManager.readPin(PD4)) positioningTime+=1;
                     if(inputManager.readPin(PD5)) positioningTime+=2;
