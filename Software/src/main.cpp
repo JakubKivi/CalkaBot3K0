@@ -30,7 +30,7 @@ void setup() {
     Palatis::SoftPWM.set(0, FULL_SPEED); 
     Palatis::SoftPWM.set(1, FULL_SPEED);    //dla pozycjonowania na starcie
 
-    pinMode(2, INPUT);
+    pinMode(2, INPUT_PULLUP);
     Serial.begin(9600);
 
 }
@@ -44,18 +44,17 @@ void loop() {
         switch (inputManager.readDecimalValue())
         {
             case 0:
-            frontMotor.on();
-                // positioned = false;
-                // calkaBot.stop();
-                // frontMotor.off();
-                // Serial.println("Left: "+ String(left.read()) + "    Mid: " + String(front.read()) +"       Right: " + String(right.read() ));
+                positioned = false;
+                calkaBot.stop();
+                frontMotor.off();
+                Serial.println("Left: "+ String(left.read()) + "    Mid: " + String(front.read()) +"       Right: " + String(right.read() ));
                 
-                // if (front.read() > FRONT_THRESHOLD or right.read() > FRONT_RIGHT_THRESHOLD or left.read() > FRONT_LEFT_THRESHOLD)
-                // {
-                //     buildLed.on();
-                // }else{
-                //     buildLed.off();
-                // }
+                if (front.read() > FRONT_THRESHOLD or right.read() > FRONT_RIGHT_THRESHOLD or left.read() > FRONT_LEFT_THRESHOLD)
+                {
+                    buildLed.on();
+                }else{
+                    buildLed.off();
+                }
                 _delay_ms(500);
             break;
             
@@ -75,6 +74,7 @@ void loop() {
             case 15:        //prawo z szukaniem
                 if (!positioned)
                 {
+                    delay(3000);
                     int positioningTime = 1;
                     if(inputManager.readPin(PD4)) positioningTime+=1;
                     if(inputManager.readPin(PD5)) positioningTime+=2;
