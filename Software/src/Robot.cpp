@@ -1,6 +1,9 @@
 #include "../include/Robot.h"
 #include "FrontMotor.h"
 #include <Arduino.h>
+#include "../lib/SoftPWM.h"
+#include "../include/config.h"
+#include "../include/Sensor.h"
 
 
 Robot::Robot(volatile uint8_t* ddr, volatile uint8_t* port, 
@@ -18,7 +21,9 @@ Robot::Robot(volatile uint8_t* ddr, volatile uint8_t* port,
       }
 
 void Robot::setSpeed(uint8_t speedLeft, uint8_t speedRight) {
-    // Ustawienie prędkości PWM (0-255)
+    
+//   Palatis::SoftPWM.set(0, 255); // Kanał 0 (pin 13): wartość 100
+//   Palatis::SoftPWM.set(1, 255); // Kanał 1 (pin 12): wartość 100
     
 }
 
@@ -48,33 +53,36 @@ void Robot::stop() {
 }
 
 void Robot::leftCurve() {
-    // Lewe koło porusza się do przodu, prawe koło zatrzymane
-    *port |= (1 << pinForwardL); // Włącz napęd lewego koła do przodu
-    *port &= ~((1 << pinBackwardL) | (1 << pinForwardR) | (1 << pinBackwardR)); // Wyłącz inne kierunki
+    // Lewe  do przodu, prawe zatrzymane
+    
+
+    *port |= (1 << pinForwardR); 
+    *port &= ~((1 << pinBackwardR) | (1 << pinForwardL) | (1 << pinBackwardL)); 
 }
 
 void Robot::rightCurve() {
-    // Prawe koło porusza się do przodu, lewe koło zatrzymane
-    *port |= (1 << pinForwardR); // Włącz napęd prawego koła do przodu
-    *port &= ~((1 << pinBackwardR) | (1 << pinForwardL) | (1 << pinBackwardL)); // Wyłącz inne kierunki
+    // Prawe do przodu, lewe zatrzymane
+    
+    *port |= (1 << pinForwardL); 
+    *port &= ~((1 << pinBackwardL) | (1 << pinForwardR) | (1 << pinBackwardR)); 
 }
 
-void Robot::position(FrontMotor* frontMotor, int time, bool direction){
+void Robot::position(Sensor* left, Sensor* front, Sensor* right, int time, bool direction){
     
-    frontMotor->on();
+    int timeInMs;
     if (direction)
     {
         rightTurn();
         switch (time)
         {
             case 1:
-                _delay_ms(450);
+                timeInMs =POSITIONING_RIGHT_TURN_1;
             break;
             case 2:
-                _delay_ms(500);
+                timeInMs =POSITIONING_RIGHT_TURN_2;
             break;
             default:
-                _delay_ms(550);
+                timeInMs =POSITIONING_RIGHT_TURN_3;
             break;
         }
     }else{
@@ -82,17 +90,23 @@ void Robot::position(FrontMotor* frontMotor, int time, bool direction){
         switch (time)
         {
             case 1:
-                _delay_ms(200);
+                 timeInMs =POSITIONING_LEFT_TURN_1;
             break;
             case 2:
-                _delay_ms(250);
+                timeInMs =POSITIONING_LEFT_TURN_2;
             break;
             default:
-                _delay_ms(300);
+                timeInMs =POSITIONING_LEFT_TURN_3;
             break;
         }
     }
-    
+    int i = 0;
+    while ( i < timeInMs ){
+        delay(10);
+        i+=10;
+        // if(right->read() > FRONT_RIGHT_THRESHOLD || front->read()>FRONT_THRESHOLD || left->read() > FRONT_LEFT_THRESHOLD) //jak coś widzisz to przestań
+        //     break;
+    }
     
     stop();
 }

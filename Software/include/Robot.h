@@ -3,8 +3,7 @@
 
 #include <avr/io.h>
 #include "FrontMotor.h"
-
-// Dodaj odpowiednią bibliotekę do obsługi PWM
+#include "../include/Sensor.h"
 
 #define ROBOT_RIGHT_DDR DDRB
 #define ROBOT_RIGHT_PORT PORTB
@@ -37,7 +36,7 @@ public:
     void rightCurve();
     void stop();
 
-    void position(FrontMotor* frontMotor, int time, bool direction); // 0 - left, 1 - right
+    void position(Sensor* left, Sensor* front, Sensor* right,  int time, bool direction); // 0 - left, 1 - right
 };
 
 #endif
